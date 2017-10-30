@@ -56,9 +56,13 @@ class RunningCounter(object):
         self.bydate_sorted_keys = []
         self.bydate_sorted_len = 0
         # byzip takes the form:
-        # {ID: {zip:{ center:[middle 2 or 3 elements of all contributions], num, sum} }
+        # {ID: {zip:{ list, num, sum} }
+        # where list contains all transaction amt of given id and zip at this moment
         # bydate takes the form:
-        # {ID: {date:{[list of contributions]} }
+        # {ID: {date:{ list, num, sum} }
+        # where list contains all transaction amt of given id and date
+        # bydate_sorted_keys keeps a sorted list of pairs (id,date)
+        # bydate_sorted_len keeps the length of bydate_sorted_keys
         self.input_file = './input/itcont.txt'
         self.output_file_byzip = './output/medianvals_by_zip.txt'
         self.output_file_bydate = './output/medianvals_by_date.txt'
@@ -73,6 +77,7 @@ class RunningCounter(object):
         other_id = l[15]
 
         # only deal with a vaild entry
+        # didn't check the validity of transaction_amt, as it is not mentioned in the requirement
         if (other_id == '') and (cmte_id != '') and (transaction_amt != ''):
             d_amt = float(transaction_amt)
             # check whether entry is valid for byzip:

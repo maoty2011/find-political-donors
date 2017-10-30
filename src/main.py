@@ -111,7 +111,7 @@ class RunningCounter(object):
                 f1.write(byzip_line)
 
             if dt_is_valid(transaction_dt):
-                # rewrite transaction_dt as yyyymmdd
+                # rewrite transaction_dt as yyyymmdd, so that the string order is chronological order
                 transaction_dt = transaction_dt[4:]+transaction_dt[:4]
                 # add info to bydate
                 try:
